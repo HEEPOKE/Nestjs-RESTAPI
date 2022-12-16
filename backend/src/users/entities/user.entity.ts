@@ -13,4 +13,7 @@ export class User {
 
   @Column()
   Password: string;
+
+  @Column()
+  Role: any;
 }
