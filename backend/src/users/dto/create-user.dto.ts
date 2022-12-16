@@ -1,3 +1,7 @@
-import * as bcrypt from 'bcrypt';
-
-export class CreateUserDto {}
+export class CreateUserDto {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+}
