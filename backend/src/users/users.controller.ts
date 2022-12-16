@@ -6,27 +6,34 @@ import {
   Patch,
   Param,
   Delete,
-  HttpStatus,
 } from '@nestjs/common';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ValidationPipe } from '@nestjs/common';
+import { User } from './entities/user.entity';
+import { UserUtils } from 'src/utils/user.util';
 
+@ApiTags('User')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   @Post()
-  create(
-    @Body(
-      new ValidationPipe({
-        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-      }),
-    )
+  @ApiCreatedResponse({
+    description: 'Created user object as response',
+    type: User,
+  })
+  @ApiBadRequestResponse({ description: 'User cannot add. Try again!' })
+  async create(
+    @Body(UserUtils.VALIDATION_PIPE)
     createUserDto: CreateUserDto,
-  ) {
-    return this.usersService.create(createUserDto);
+  ): Promise<User> {
+    return await this.usersService.create(createUserDto);
   }
 
   @Get()
