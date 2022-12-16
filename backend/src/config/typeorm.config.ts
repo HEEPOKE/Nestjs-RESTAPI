@@ -3,6 +3,7 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -15,7 +16,8 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: process.env.DB_USERNAME,
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      entities: [User],
+      //   entities: [__dirname + '/../**/*.entity.{js,ts}'],
       synchronize: false,
     };
   },
@@ -28,6 +30,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
+  entities: [User],
+  //   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: false,
 };
