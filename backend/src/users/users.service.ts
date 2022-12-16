@@ -20,8 +20,8 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findOne(id: number): Promise<User[]> {
-    return this.userRepository.findOneBy(id);
+  findOne(id: number): Promise<User> {
+    return this.userRepository.findOneBy({ id });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
