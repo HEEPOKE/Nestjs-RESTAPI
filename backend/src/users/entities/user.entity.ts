@@ -5,13 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  BaseEntity,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';
 import { UserRoles } from '../enums/user.enum';
 
 @Entity({ name: 'users' })
-export class User {
+export class User extends BaseEntity {
   @ApiProperty({ description: 'Primary key as User ID', example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
