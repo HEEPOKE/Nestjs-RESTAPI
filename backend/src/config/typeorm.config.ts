@@ -29,7 +29,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   port: parseInt(process.env.DB_PORT, 10),
   username: process.env.DB_USERNAME,
   database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  password: process.env.DB_PASSWORD || 'yoyo5555',
   entities: [User],
   //   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: false,

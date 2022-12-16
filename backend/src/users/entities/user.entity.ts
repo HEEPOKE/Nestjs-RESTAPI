@@ -45,9 +45,9 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @BeforeInsert()
-  async setPassword(password: string) {
-    const salt = await bcrypt.genSalt();
-    this.Password = await bcrypt.hash(password || this.Password, salt);
-  }
+  // @BeforeInsert()
+  // async setPassword(password: string) {
+  //   const salt = await bcrypt.genSalt();
+  //   this.Password = await bcrypt.hash(password || this.Password, salt);
+  // }
 }

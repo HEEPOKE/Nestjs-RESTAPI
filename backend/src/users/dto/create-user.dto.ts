@@ -23,7 +23,7 @@ export class CreateUserDto {
     example: 'Password@123',
   })
   // @IsNotEmpty()
-  @Length(8, 20)
+  // @Length(8, 20)
   // @Matches(UserUtils.PASSWORD_RULE, {
   //   message: UserUtils.PASSWORD_RULE_MESSAGE,
   // })
