@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { typeOrmAsyncConfig, typeOrmConfig } from './config/typeorm.config';
 import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -21,8 +19,8 @@ import { User } from './users/entities/user.entity';
       entities: [User],
       synchronize: true,
     }),
-    // EventEmitterModule.forRoot(),
     UsersModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],
