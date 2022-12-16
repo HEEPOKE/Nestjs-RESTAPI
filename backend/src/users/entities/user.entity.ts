@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';
+import { UserRoles } from '../enums/user.enum';
 
 @Entity({ name: 'users' })
 export class User {
@@ -15,13 +16,13 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ description: 'User name', example: 'Jhon Doe' })
+  @ApiProperty({ description: 'User name', example: 'HEEPOKE' })
   @Column()
   Username: string;
 
   @ApiProperty({
     description: 'User email address',
-    example: 'jhon.doe@gmail.com',
+    example: 'DAamon1FX@gmail.com',
   })
   @Column({
     unique: true,
@@ -32,8 +33,8 @@ export class User {
   @Column()
   Password: string;
 
-  @Column()
-  Role: string;
+  @Column({ type: 'enum', enum: UserRoles, default: UserRoles.USER })
+  Role: UserRoles;
 
   @ApiProperty({ description: 'When user was created' })
   @CreateDateColumn()
