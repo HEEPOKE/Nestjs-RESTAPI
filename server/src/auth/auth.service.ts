@@ -8,10 +8,14 @@ export class AuthService {
   constructor(private prisma: PrismaService) {}
 
   signUp(dto: AuthDto) {
-    const salt = bcrypt.genSalt<string>(10);
-    const hashBcrypt = bcrypt.hash(
-      dto.password,
-      salt,
+    const saltRounds = 10;
+    const myPlaintextPassword = 's0//P4$$w0rD';
+    bcrypt.hash(
+      myPlaintextPassword,
+      saltRounds,
+      function (err: any, hash: any) {
+       dto.password,
+      },
     );
     return { msg: dto };
   }
