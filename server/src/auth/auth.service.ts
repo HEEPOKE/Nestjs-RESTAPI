@@ -55,7 +55,7 @@ export class AuthService {
 
     if (!checkUser)
       throw new ForbiddenException(
-        'Credentials incorrect',
+        'Email incorrect',
       );
 
     const checkPassword = await bcrypt.compare(
@@ -65,7 +65,7 @@ export class AuthService {
 
     if (!checkPassword)
       throw new ForbiddenException(
-        'Credentials incorrect',
+        'Password incorrect',
       );
 
     delete checkUser.password;
