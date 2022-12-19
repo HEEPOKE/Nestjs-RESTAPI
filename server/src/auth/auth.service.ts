@@ -41,7 +41,30 @@ export class AuthService {
     }
   }
 
-  signIn() {
-    return 'This action adds a new auth';
+  async signIn(dto: AuthDto) {
+    const checkUser =
+      await this.prisma.user.findUnique({
+        where: {
+          email: dto.email,
+        },
+      });
+
+    if (!checkUser)
+      throw new ForbiddenException(
+        'Credentials incorrect',
+      );
+
+    const checkPassword = await bcrypt.compare(
+      dto.password,
+      checkUser.password,
+    );
+
+    if (!checkPassword)
+      throw new ForbiddenException(
+        'Credentials incorrect',
+      );
+
+    delete checkUser.password;
+    return checkUser;
   }
 }
