@@ -13,7 +13,7 @@ export class AuthService {
       dto.password,
       salt,
     );
-    const newUser = await this.prisma.User.create(
+    const newUser = await this.prisma.user.create(
       {
         data: {
           email: dto.email,
