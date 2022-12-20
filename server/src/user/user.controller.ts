@@ -12,8 +12,11 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { JwtGuard } from '../auth/guard';
+import { GetUser } from '../auth/decorator';
 
-@Controller('user')
+@UseGuards(JwtGuard)
+@Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
 
