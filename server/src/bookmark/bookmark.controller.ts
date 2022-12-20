@@ -10,7 +10,9 @@ import {
   ParseIntPipe,
   Delete,
   UseGuards,
+  Redirect,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { BookmarkService } from './bookmark.service';
 import {
   CreateBookmarkDto,
@@ -23,6 +25,7 @@ import { JwtGuard } from 'src/auth/guard';
 @Controller('bookmarks')
 export class BookmarkController {
   constructor(
+    config: ConfigService,
     private bookmarkService: BookmarkService,
   ) {}
 
@@ -50,6 +53,7 @@ export class BookmarkController {
   }
 
   @Post('add')
+  // @Redirect(config.get('ENDPOINT_URL'), 200)
   createBookmark(
     @GetUser('id') userId: number,
     @Body() dto: CreateBookmarkDto,
