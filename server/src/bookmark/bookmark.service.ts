@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBookmarkDto } from './dto/create-bookmark.dto';
-import { UpdateBookmarkDto } from './dto/update-bookmark.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import {
+  CreateBookmarkDto,
+  UpdateBookmarkDto,
+} from './dto';
 
 @Injectable()
 export class BookmarkService {
+  constructor(private prisma: PrismaService) {}
+
   create(createBookmarkDto: CreateBookmarkDto) {
     return 'This action adds a new bookmark';
   }
@@ -16,7 +21,10 @@ export class BookmarkService {
     return `This action returns a #${id} bookmark`;
   }
 
-  update(id: number, updateBookmarkDto: UpdateBookmarkDto) {
+  update(
+    id: number,
+    updateBookmarkDto: UpdateBookmarkDto,
+  ) {
     return `This action updates a #${id} bookmark`;
   }
 
