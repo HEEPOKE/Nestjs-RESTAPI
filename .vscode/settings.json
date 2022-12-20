@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["datasources", "nestjs", "signin"]
+  "cSpell.words": [
+    "datasources",
+    "getbookmark",
+    "mybookmark",
+    "nestjs",
+    "signin"
+  ]
 }
