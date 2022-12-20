@@ -3,6 +3,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto';
@@ -13,6 +14,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwt: JwtService,
+    private config: ConfigService,
   ) {}
 
   async signUp(dto: AuthDto) {
@@ -68,7 +70,32 @@ export class AuthService {
         'Password incorrect',
       );
 
-    delete checkUser.password;
-    return checkUser;
+    return this.generateToken(
+      checkUser.id,
+      checkUser.email,
+    );
+  }
+
+  async generateToken(
+    userId: number,
+    email: string,
+  ): Promise<{ access_token: string }> {
+    const payload = {
+      id: userId,
+      email,
+    };
+    const secret = this.config.get('JWT_SECRET');
+
+    const token = await this.jwt.signAsync(
+      payload,
+      {
+        expiresIn: '360m',
+        secret: secret,
+      },
+    );
+
+    return {
+      access_token: token,
+    };
   }
 }
