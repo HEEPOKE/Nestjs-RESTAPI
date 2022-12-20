@@ -11,6 +11,7 @@ import {
   Delete,
   UseGuards,
   Redirect,
+  NotFoundException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { BookmarkService } from './bookmark.service';
@@ -42,14 +43,22 @@ export class BookmarkController {
   }
 
   @Get('bookmark/:id')
-  getBookmarkById(
+  async getBookmarkById(
     @GetUser('id') userId: number,
     @Param('id', ParseIntPipe) bookmarkId: number,
   ) {
-    return this.bookmarkService.getBookmarkUserById(
-      userId,
-      bookmarkId,
-    );
+    const getBookmarkById =
+      await this.bookmarkService.getBookmarkUserById(
+        userId,
+        bookmarkId,
+      );
+
+    if (!getBookmarkById) {
+      return new NotFoundException(
+        `userId ${userId} not found Bookmark`,
+      );
+    }
+    return getBookmarkById;
   }
 
   @Post('add')
