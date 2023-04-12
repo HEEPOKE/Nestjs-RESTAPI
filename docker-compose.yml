@@ -8,7 +8,3 @@ services:
       POSTGRES_USER: yoyo
       POSTGRES_PASSWORD: 5555
       POSTGRES_DB: prisma
-    networks:
-      - freecodecamp
-networks:
-  freecodecamp:
